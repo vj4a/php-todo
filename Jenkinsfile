@@ -67,7 +67,7 @@ pipeline {
   stage ('Upload Artifact to Artifactory') {
           steps {
             script { 
-                 def server = Artifactory.newServer url: 'http://10.0.4.80:8082/artifactory', credentialsId: 'artifactory-token'
+                 def server = Artifactory.newServer url: 'http://10.0.3.80:8082/artifactory', credentialsId: 'artifactory-token'
                  def uploadSpec = """{
                     "files": [
                       {

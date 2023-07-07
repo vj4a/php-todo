@@ -64,6 +64,29 @@ pipeline {
      }
     }
 
+  stage ('Upload Artifact to Artifactory') {
+          steps {
+            script { 
+                 def server = Artifactory.server 'artifactory-server'
+                 def server = Artifactory.newServer url: 'http://44.211.177.79:8082/artifactory', credentialsId: 'artifactory-token'
+                 def uploadSpec = """{
+                    "files": [
+                      {
+                       "pattern": "php-todo.zip",
+                       "target": "PBL/php-todo",
+                       "props": "type=zip;status=ready"
+
+                       }
+                    ]
+                 }""" 
+
+                 server.upload spec: uploadSpec
+               }
+            }
+
+        }
+
+
      
   }
 }
